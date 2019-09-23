@@ -29,5 +29,7 @@ jobs:
 workflows:
   continuous-integration:
     jobs:
-      - vet_and_test
-      - review
+      - vet_and_test:
+          context: org-global
+      - review:
+          context: org-global
