@@ -1,13 +1,22 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+
+executors:
+  default:
+    working_directory: /go/src/github.com/tunepolo/leetcode-go
     docker:
       - image: circleci/golang:1.13
 
-    working_directory: /go/src/github.com/tunepolo/leetcode-go
+jobs:
+  vet_and_test:
+    executor:
+      name: default
     steps:
       - checkout
-
       - run: go get -t -v ./...
       - run: go vet ./...
       - run: go test ./...
+
+workflows:
+  continuous-integration:
+    jobs:
+      - vet_and_test
