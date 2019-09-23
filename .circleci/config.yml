@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  reviewdog: timakin/reviewdog@0.2.0
+
 executors:
   default:
     working_directory: /go/src/github.com/tunepolo/leetcode-go
@@ -15,8 +18,16 @@ jobs:
       - run: go get -t -v ./...
       - run: go vet ./...
       - run: go test ./...
+  review:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - reviewdog/review:
+          linters: "golang.org/x/lint/golint github.com/kisielk/errcheck"
 
 workflows:
   continuous-integration:
     jobs:
       - vet_and_test
+      - review
