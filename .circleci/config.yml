@@ -19,8 +19,7 @@ jobs:
       - run: 'curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh| sh -s -- -b $(go env GOPATH)/bin'
       - run: go get golang.org/x/lint/golint
       - run: go get -t -v ./...
-      - run: go vet ./...
-      - run: golint ./... | reviewdog -name=golint-circleci -reporter=github-pr-review
+      - run: reviewdog -name=golint-circleci -reporter=github-pr-review
       - run: go test ./...
 
 workflows:
