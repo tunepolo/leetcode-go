@@ -12,7 +12,6 @@ jobs:
       name: default
     steps:
       - checkout
-
       - run:
           name: System information
           command: 'echo "Golang $(go version)"'
