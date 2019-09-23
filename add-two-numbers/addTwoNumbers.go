@@ -1,5 +1,6 @@
 package addtwonumbers
 
+// ListNode is linked-list node that store 1 int value.
 type ListNode struct {
 	Val  int
 	Next *ListNode
