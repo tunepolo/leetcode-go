@@ -1,4 +1,4 @@
-package lengthOfLongestSubstring
+package lengthoflongestsubstring
 
 func lengthOfLongestSubstring(s string) int {
 	answer := 0
