@@ -4,7 +4,7 @@ executors:
   default:
     working_directory: /go/src/github.com/tunepolo/leetcode-go
     docker:
-      - image: circleci/golang:1.13
+      - image: circleci/golang:1.14
 
 jobs:
   checks:
