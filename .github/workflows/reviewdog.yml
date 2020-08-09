@@ -7,12 +7,19 @@ jobs:
     name: reviewdog
     runs-on: ubuntu-latest
     steps:
-      - uses: reviewdog/action-setup@v1
+      - uses: actions/setup-go@v2
+        with:
+          go-version: 1.14
+
+      - uses: actions/checkout@v2
+
+      - name: Install linters
+        run: go get golang.org/x/lint/golint
+
+      - name: Setup reviewdog
+        uses: reviewdog/action-setup@v1
         with:
           reviewdog_version: latest # Optional. [latest,nightly,v.X.Y.Z]
-
-      - name: Checkout code
-        uses: actions/checkout@v2
 
       - name: Run reviewdog
         env:
