@@ -2,72 +2,78 @@ package romantointeger
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
-// Case test definition
-type Case struct {
-	parameters string
-	expected   int
-}
-
-func TestRomanToInt(t *testing.T) {
-	var cases = []Case{
-		// Simple case
-		Case{
-			parameters: "II",
-			expected:   2,
+func Test_romanToInt(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "Simple case 1",
+			args: args{s: "II"},
+			want: 2,
 		},
-		Case{
-			parameters: "XII",
-			expected:   12,
+		{
+			name: "Simple case 2",
+			args: args{s: "XII"},
+			want: 12,
 		},
-		Case{
-			parameters: "XXVII",
-			expected:   27,
+		{
+			name: "Simple case 3",
+			args: args{s: "XXVII"},
+			want: 27,
 		},
-		// Need substruction
-		Case{
-			parameters: "IV",
-			expected:   4,
+		{
+			name: "Need subtraction 1",
+			args: args{s: "IV"},
+			want: 4,
 		},
-		Case{
-			parameters: "IX",
-			expected:   9,
+		{
+			name: "Need subtraction 2",
+			args: args{s: "IX"},
+			want: 9,
 		},
-		Case{
-			parameters: "XL",
-			expected:   40,
+		{
+			name: "Need subtraction 3",
+			args: args{s: "XL"},
+			want: 40,
 		},
-		Case{
-			parameters: "XC",
-			expected:   90,
+		{
+			name: "Need subtraction 4",
+			args: args{s: "XC"},
+			want: 90,
 		},
-		Case{
-			parameters: "CD",
-			expected:   400,
+		{
+			name: "Need subtraction 5",
+			args: args{s: "CD"},
+			want: 400,
 		},
-		Case{
-			parameters: "CM",
-			expected:   900,
+		{
+			name: "Need subtraction 6",
+			args: args{s: "CM"},
+			want: 900,
 		},
-		// Complex case
-		Case{
-			parameters: "LVIII",
-			expected:   58,
+		{
+			name: "Complex case 1",
+			args: args{s: "LVIII"},
+			want: 58,
 		},
-		Case{
-			parameters: "MCMXCIV",
-			expected:   1994,
-		},
-		Case{
-			parameters: "III",
-			expected:   3,
+		{
+			name: "Complex case 2",
+			args: args{s: "MCMXCIV"},
+			want: 1994,
 		},
 	}
-	for _, c := range cases {
-		result := romanToInt(c.parameters)
-		assert.Equal(t, c.expected, result)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := romanToInt(tt.args.s); got != tt.want {
+				t.Errorf("romanToInt() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

@@ -2,42 +2,48 @@ package reverseinteger
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
-// Case test definition
-type Case struct {
-	parameters int
-	expected   int
-}
-
-func TestReverse(t *testing.T) {
-	cases := []Case{
-		Case{
-			parameters: 123,
-			expected:   321,
+func Test_reverse(t *testing.T) {
+	type args struct {
+		x int
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "Case 1",
+			args: args{x: 123},
+			want: 321,
 		},
-		Case{
-			parameters: -123,
-			expected:   -321,
+		{
+			name: "Negative integer",
+			args: args{x: -123},
+			want: -321,
 		},
-		Case{
-			parameters: 120,
-			expected:   21,
+		{
+			name: "0 end",
+			args: args{x: 120},
+			want: 21,
 		},
-		Case{
-			parameters: 1534236469,
-			expected:   0,
+		{
+			name: "Bigger than threshold",
+			args: args{x: 1534236469},
+			want: 0,
 		},
-		Case{
-			parameters: -1147483647,
-			expected:   0,
+		{
+			name: "Smaller than threshold",
+			args: args{x: -1147483647},
+			want: 0,
 		},
 	}
-
-	for _, c := range cases {
-		result := reverse(c.parameters)
-		assert.Equal(t, c.expected, result)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := reverse(tt.args.x); got != tt.want {
+				t.Errorf("reverse() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

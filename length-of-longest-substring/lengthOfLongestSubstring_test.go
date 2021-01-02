@@ -2,34 +2,44 @@ package lengthoflongestsubstring
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
-// Case test definition
-type Case struct {
-	str      string
-	expected int
-}
-
-func TestTwoSum(t *testing.T) {
-	var cases = []Case{
-		Case{
-			str:      "abcabcbb",
-			expected: 3,
+func Test_lengthOfLongestSubstring(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{
+			name: "Case 1",
+			args: args{
+				s: "abcabcbb",
+			},
+			want: 3,
 		},
-		Case{
-			str:      "bbbbb",
-			expected: 1,
+		{
+			name: "Case 2",
+			args: args{
+				s: "bbbbb",
+			},
+			want: 1,
 		},
-		Case{
-			str:      "pwwkew",
-			expected: 3,
+		{
+			name: "Case 3",
+			args: args{
+				s: "pwwkew",
+			},
+			want: 3,
 		},
 	}
-
-	for _, c := range cases {
-		result := lengthOfLongestSubstring(c.str)
-		assert.Equal(t, c.expected, result)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := lengthOfLongestSubstring(tt.args.s); got != tt.want {
+				t.Errorf("lengthOfLongestSubstring() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
