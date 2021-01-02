@@ -2,45 +2,65 @@ package longestcommonprefix
 
 import (
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
-// Case test definition
-type Case struct {
-	parameters []string
-	expected   string
-}
-
-func TestLongestCommonPrefix(t *testing.T) {
-	var cases = []Case{
+func Test_longestCommonPrefix(t *testing.T) {
+	type args struct {
+		strs []string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
 		{
-			parameters: []string{"flower", "flow", "flight"},
-			expected:   "fl",
+			name: "Case 1",
+			args: args{
+				strs: []string{"flower", "flow", "flight"},
+			},
+			want: "fl",
 		},
 		{
-			parameters: []string{"dog", "racecar", "car"},
-			expected:   "",
+			name: "Case 2",
+			args: args{
+				strs: []string{"dog", "racecar", "car"},
+			},
+			want: "",
 		},
 		{
-			parameters: []string{},
-			expected:   "",
+			name: "Case 3",
+			args: args{
+				strs: []string{},
+			},
+			want: "",
 		},
 		{
-			parameters: []string{"flower"},
-			expected:   "flower",
+			name: "Case 4",
+			args: args{
+				strs: []string{"flower"},
+			},
+			want: "flower",
 		},
 		{
-			parameters: []string{"flower", "flow", ""},
-			expected:   "",
+			name: "Case 5",
+			args: args{
+				strs: []string{"flower", "flow", ""},
+			},
+			want: "",
 		},
 		{
-			parameters: []string{"ab", "a"},
-			expected:   "a",
+			name: "Case 6",
+			args: args{
+				strs: []string{"ab", "a"},
+			},
+			want: "a",
 		},
 	}
-	for _, c := range cases {
-		result := longestCommonPrefix(c.parameters)
-		assert.Equal(t, c.expected, result)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := longestCommonPrefix(tt.args.strs); got != tt.want {
+				t.Errorf("longestCommonPrefix() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

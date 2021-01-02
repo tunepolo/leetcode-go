@@ -1,9 +1,8 @@
 package addtwonumbers
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 func array2ListNode(values []int) *ListNode {
@@ -18,46 +17,38 @@ func array2ListNode(values []int) *ListNode {
 	return tmp.Next
 }
 
-func listNode2Array(l *ListNode) []int {
-	arr := make([]int, 0)
-	for l != nil {
-		arr = append(arr, l.Val)
-		l = l.Next
+func Test_addTwoNumbers(t *testing.T) {
+	type args struct {
+		l1 *ListNode
+		l2 *ListNode
 	}
-	return arr
-}
-
-type input struct {
-	l1 *ListNode
-	l2 *ListNode
-}
-
-// Case test definition
-type Case struct {
-	parameters input
-	expected   []int
-}
-
-func TestAddTwoNumbers(t *testing.T) {
-	cases := []Case{
-		Case{
-			parameters: input{
+	tests := []struct {
+		name string
+		args args
+		want *ListNode
+	}{
+		{
+			name: "Case 1",
+			args: args{
 				l1: array2ListNode([]int{2, 4, 3}),
 				l2: array2ListNode([]int{5, 6, 4}),
 			},
-			expected: []int{7, 0, 8},
+			want: array2ListNode([]int{7, 0, 8}),
 		},
-		Case{
-			parameters: input{
+		{
+			name: "Case 2",
+			args: args{
 				l1: array2ListNode([]int{1, 8}),
 				l2: array2ListNode([]int{0}),
 			},
-			expected: []int{1, 8},
+			want: array2ListNode([]int{1, 8}),
 		},
 	}
-
-	for _, c := range cases {
-		result := addTwoNumbers(c.parameters.l1, c.parameters.l2)
-		assert.Equal(t, c.expected, listNode2Array(result))
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := addTwoNumbers(tt.args.l1, tt.args.l2); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("addTwoNumbers() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }

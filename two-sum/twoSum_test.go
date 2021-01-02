@@ -1,28 +1,34 @@
 package twosum
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
-// Case test definition
-type Case struct {
-	nums     []int
-	target   int
-	expected []int
-}
-
-func TestTwoSum(t *testing.T) {
-	var cases = []Case{
-		Case{nums: []int{2, 7, 11, 15},
-			target:   9,
-			expected: []int{0, 1},
+func Test_twoSum(t *testing.T) {
+	type args struct {
+		nums   []int
+		target int
+	}
+	tests := []struct {
+		name string
+		args args
+		want []int
+	}{
+		{
+			name: "Case 1",
+			args: args{
+				nums:   []int{2, 7, 11, 15},
+				target: 9,
+			},
+			want: []int{0, 1},
 		},
 	}
-
-	for _, c := range cases {
-		result := twoSum(c.nums, c.target)
-		assert.Equal(t, c.expected, result)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := twoSum(tt.args.nums, tt.args.target); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("twoSum() = %v, want %v", got, tt.want)
+			}
+		})
 	}
 }
