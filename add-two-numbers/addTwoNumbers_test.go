@@ -17,15 +17,6 @@ func array2ListNode(values []int) *ListNode {
 	return tmp.Next
 }
 
-func listNode2Array(l *ListNode) []int {
-	arr := make([]int, 0)
-	for l != nil {
-		arr = append(arr, l.Val)
-		l = l.Next
-	}
-	return arr
-}
-
 func Test_addTwoNumbers(t *testing.T) {
 	type args struct {
 		l1 *ListNode
