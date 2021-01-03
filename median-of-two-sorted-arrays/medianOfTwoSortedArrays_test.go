@@ -1,4 +1,4 @@
-package findmediansortedarrays
+package medianoftwosortedarrays
 
 import (
 	"testing"

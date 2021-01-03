@@ -1,5 +1,7 @@
 package validparentheses
 
+// https://leetcode.com/problems/valid-parentheses/
+
 import (
 	"strings"
 )
