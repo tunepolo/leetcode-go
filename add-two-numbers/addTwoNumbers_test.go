@@ -6,7 +6,7 @@ import (
 )
 
 func array2ListNode(values []int) *ListNode {
-	tmp := &ListNode{Val: values[0]}
+	tmp := &ListNode{Val: 0}
 	cur := tmp
 
 	for _, val := range values {
