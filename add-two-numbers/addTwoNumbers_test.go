@@ -6,7 +6,7 @@ import (
 )
 
 func array2ListNode(values []int) *ListNode {
-	tmp := &ListNode{Val: values[0]}
+	tmp := &ListNode{Val: 0}
 	cur := tmp
 
 	for _, val := range values {
@@ -15,6 +15,15 @@ func array2ListNode(values []int) *ListNode {
 	}
 
 	return tmp.Next
+}
+
+func listNode2Array(l *ListNode) []int {
+	arr := make([]int, 0)
+	for l != nil {
+		arr = append(arr, l.Val)
+		l = l.Next
+	}
+	return arr
 }
 
 func Test_addTwoNumbers(t *testing.T) {
