@@ -1,11 +1,9 @@
 package zigzagconversion
 
-import "strings"
-
 // https://leetcode.com/problems/zigzag-conversion/
 
 func convert(s string, numRows int) string {
-	var ret []string
+	var ret []byte
 
 	if numRows == 1 {
 		return s
@@ -16,13 +14,13 @@ func convert(s string, numRows int) string {
 
 	for i := 0; i < numRows; i++ {
 		for j := 0; j+i < length; j += increment {
-			ret = append(ret, string(s[i+j]))
+			ret = append(ret, s[i+j])
 
 			if i != 0 && i != numRows-1 && j+increment-i < length {
-				ret = append(ret, string(s[j+increment-i]))
+				ret = append(ret, s[j+increment-i])
 			}
 		}
 	}
 
-	return strings.Join(ret, "")
+	return string(ret)
 }
