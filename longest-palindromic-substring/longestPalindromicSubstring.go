@@ -1,5 +1,7 @@
 package longestpalindromicsubstring
 
+// https://leetcode.com/problems/longest-palindromic-substring/
+
 func longestPalindrome(s string) string {
 	start := 0
 	end := 1
