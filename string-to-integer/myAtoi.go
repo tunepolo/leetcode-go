@@ -4,14 +4,24 @@ package myatoi
 
 func myAtoi(s string) int {
 	var ret int
-	var negative bool
 
-	for _, ch := range []byte(s) {
+	// find first character index
+	var index int
+FIND_CHAR:
+	for i, ch := range []byte(s) {
 		switch {
-		case ch == '-':
-			negative = true
+		case ch == ' ':
 			continue
-		case ch < '0' || '9' < ch:
+		case ch == '+' || ch == '-' || ('0' <= ch && ch <= '9'):
+			index = i
+			break FIND_CHAR
+		default:
+			return 0 // invalid input
+		}
+	}
+
+	for _, ch := range []byte(s[index:]) {
+		if ch < '0' || '9' < ch {
 			continue
 		}
 
@@ -19,7 +29,7 @@ func myAtoi(s string) int {
 		ret = ret*10 + int(ch)
 	}
 
-	if negative {
+	if s[index] == '-' {
 		ret = -ret
 	}
 
