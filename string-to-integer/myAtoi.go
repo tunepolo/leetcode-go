@@ -6,12 +6,12 @@ func myAtoi(s string) int {
 	var ret int
 	var negative bool
 
-	for _, ch := range s {
-		switch ch {
-		case ' ', '+':
-			continue
-		case '-':
+	for _, ch := range []byte(s) {
+		switch {
+		case ch == '-':
 			negative = true
+			continue
+		case ch < '0' || '9' < ch:
 			continue
 		}
 
