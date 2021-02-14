@@ -37,9 +37,19 @@ func Test_myAtoi(t *testing.T) {
 			want: -2147483648,
 		},
 		{
+			name: "int64 upper bound",
+			args: args{s: "9223372036854775808"},
+			want: 2147483647,
+		},
+		{
 			name: "Digits after words",
 			args: args{s: "123 abc 456"},
 			want: 123,
+		},
+		{
+			name: "Plus Minus both used",
+			args: args{s: "+-12"},
+			want: 0,
 		},
 	}
 	for _, tt := range tests {

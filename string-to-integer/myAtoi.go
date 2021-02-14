@@ -6,34 +6,37 @@ import "math"
 
 func myAtoi(s string) int {
 	var ret int
+	var firstByte byte
 
-	// find first character index
-	var index int
+	// find first character
 	for i, ch := range []byte(s) {
 		if ch == ' ' {
 			continue
-		} else if ch == '+' || ch == '-' || ('0' <= ch && ch <= '9') {
-			index = i
+		} else if ch == '+' || ch == '-' {
+			firstByte = ch
+			s = s[i+1:]
+			break
+		} else if '0' <= ch && ch <= '9' {
+			s = s[i:]
 			break
 		} else {
 			return 0 // invalid input
 		}
 	}
 
-	for _, ch := range []byte(s[index:]) {
+	for _, ch := range []byte(s) {
 		if ch < '0' || '9' < ch {
-			if ch == '+' || ch == '-' {
-				continue
-			}
-
 			break
 		}
 
 		ch -= '0'
 		ret = ret*10 + int(ch)
+		if ret > math.MaxInt32 {
+			break
+		}
 	}
 
-	if s[index] == '-' {
+	if firstByte == '-' {
 		ret = -ret
 	}
 
