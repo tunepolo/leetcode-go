@@ -1,22 +1,27 @@
 package myatoi
 
-import "math"
+import (
+	"bytes"
+	"math"
+	"strings"
+)
 
 // https://leetcode.com/problems/string-to-integer-atoi/
 
 func myAtoi(s string) int {
-	var ret int
-
 	s = filterInteger(s)
 	if len(s) == 0 {
 		return 0
 	}
 
-	digitStart := 0
-	if s[0] == '+' || s[0] == '-' {
-		digitStart = 1
+	var negative bool
+	if s[0] == '-' {
+		negative = true
+		s = s[1:]
 	}
-	for _, ch := range []byte(s[digitStart:]) {
+
+	var ret int
+	for _, ch := range []byte(s) {
 		ch -= '0'
 		ret = ret*10 + int(ch)
 		if ret > math.MaxInt32 {
@@ -24,7 +29,7 @@ func myAtoi(s string) int {
 		}
 	}
 
-	if s[0] == '-' {
+	if negative {
 		ret = -ret
 	}
 
@@ -39,23 +44,14 @@ func myAtoi(s string) int {
 }
 
 func filterInteger(s string) string {
-	// find first charcter
-	start := 0
-	for ; start < len(s); start++ {
-		ch := s[start]
-		if ch == ' ' {
-			continue
-		} else if ch == '+' || ch == '-' {
-			break
-		} else if '0' <= ch && ch <= '9' {
-			break
-		} else {
-			return ""
-		}
+	// check the first character is +/- or digit
+	s = strings.Trim(s, " ")
+	if len(s) == 0 || !bytes.ContainsAny([]byte("+-0123456789"), string(s[0])) {
+		return ""
 	}
 
-	// find end character
-	end := start + 1
+	// find end position
+	end := 1
 	for ; end < len(s); end++ {
 		ch := s[end]
 		if ch < '0' || '9' < ch {
@@ -63,11 +59,5 @@ func filterInteger(s string) string {
 		}
 	}
 
-	// digits not found after +/-
-	s = s[start:end]
-	if s == "+" || s == "-" {
-		return ""
-	}
-
-	return s
+	return strings.Trim(s[:end], "+")
 }
