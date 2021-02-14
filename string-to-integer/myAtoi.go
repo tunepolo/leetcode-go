@@ -1,5 +1,7 @@
 package myatoi
 
+import "math"
+
 // https://leetcode.com/problems/string-to-integer-atoi/
 
 func myAtoi(s string) int {
@@ -7,22 +9,24 @@ func myAtoi(s string) int {
 
 	// find first character index
 	var index int
-FIND_CHAR:
 	for i, ch := range []byte(s) {
-		switch {
-		case ch == ' ':
+		if ch == ' ' {
 			continue
-		case ch == '+' || ch == '-' || ('0' <= ch && ch <= '9'):
+		} else if ch == '+' || ch == '-' || ('0' <= ch && ch <= '9') {
 			index = i
-			break FIND_CHAR
-		default:
+			break
+		} else {
 			return 0 // invalid input
 		}
 	}
 
 	for _, ch := range []byte(s[index:]) {
 		if ch < '0' || '9' < ch {
-			continue
+			if ch == '+' || ch == '-' {
+				continue
+			}
+
+			break
 		}
 
 		ch -= '0'
@@ -31,6 +35,13 @@ FIND_CHAR:
 
 	if s[index] == '-' {
 		ret = -ret
+	}
+
+	// range adjustment
+	if ret > math.MaxInt32 {
+		ret = math.MaxInt32
+	} else if ret < math.MinInt32 {
+		ret = math.MinInt32
 	}
 
 	return ret
