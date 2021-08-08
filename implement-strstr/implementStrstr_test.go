@@ -102,6 +102,16 @@ var tests = []struct {
 	},
 }
 
+func Test_strStr(t *testing.T) {
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := strStr(tt.args.haystack, tt.args.needle); got != tt.want {
+				t.Errorf("strStr() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func Test_strStr_BM(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
