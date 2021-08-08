@@ -116,7 +116,7 @@ func Test_strStr_BM(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := strStr_BM(tt.args.haystack, tt.args.needle); got != tt.want {
-				t.Errorf("strStr() = %v, want %v", got, tt.want)
+				t.Errorf("strStr_BM() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -126,7 +126,7 @@ func Test_strStr_Builtin(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := strStr_Builtin(tt.args.haystack, tt.args.needle); got != tt.want {
-				t.Errorf("strStr() = %v, want %v", got, tt.want)
+				t.Errorf("strStr_Builtin() = %v, want %v", got, tt.want)
 			}
 		})
 	}
@@ -136,7 +136,7 @@ func Test_strStr_Bruteforce(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			if got := strStr_Bruteforce(tt.args.haystack, tt.args.needle); got != tt.want {
-				t.Errorf("strStr() = %v, want %v", got, tt.want)
+				t.Errorf("strStr_Bruteforce() = %v, want %v", got, tt.want)
 			}
 		})
 	}
