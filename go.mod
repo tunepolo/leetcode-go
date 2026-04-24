@@ -1,5 +1,5 @@
 module leetcode-go
 
-go 1.19
+go 1.23.0
 
-require github.com/golangci/golangci-lint v1.51.2
+require github.com/golangci/golangci-lint v1.64.8
